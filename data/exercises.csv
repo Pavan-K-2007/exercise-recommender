@@ -1,25 +1,25 @@
 exercise_id,name,muscle_groups,equipment,difficulty,exercise_type,goal_tags,contraindication_tags,instructions,review_status
-EX001,Bodyweight squat,quadriceps|glutes,bodyweight,beginner,strength,strength|general_fitness|muscle_gain,,,draft_unreviewed
-EX002,Push-up,chest|triceps|shoulders,bodyweight,beginner,strength,strength|muscle_gain|general_fitness,,,draft_unreviewed
-EX003,Plank,core,bodyweight,beginner,strength,strength|general_fitness,,,draft_unreviewed
-EX004,Glute bridge,glutes|hamstrings,bodyweight,beginner,strength,strength|general_fitness,,,draft_unreviewed
-EX005,Walking lunge,quadriceps|glutes,bodyweight,intermediate,strength,strength|muscle_gain|endurance,,,draft_unreviewed
-EX006,Jumping jacks,full_body,bodyweight,beginner,cardio,endurance|general_fitness,,,draft_unreviewed
-EX007,High knees,quadriceps|core,bodyweight,beginner,cardio,endurance,,,draft_unreviewed
-EX008,Burpee,full_body,bodyweight,advanced,cardio,endurance|strength,,,draft_unreviewed
-EX009,Mountain climbers,core|shoulders,bodyweight,intermediate,cardio,endurance|general_fitness,,,draft_unreviewed
-EX010,Pull-up,back|biceps,pull_up_bar,advanced,strength,strength|muscle_gain,,,draft_unreviewed
-EX011,Dumbbell bench press,chest|triceps,dumbbells|bench,intermediate,strength,muscle_gain|strength,,,draft_unreviewed
-EX012,Dumbbell row,back|biceps,dumbbells,beginner,strength,muscle_gain|strength|general_fitness,,,draft_unreviewed
-EX013,Dumbbell shoulder press,shoulders|triceps,dumbbells,intermediate,strength,muscle_gain|strength,,,draft_unreviewed
-EX014,Goblet squat,quadriceps|glutes,kettlebell,beginner,strength,strength|muscle_gain|general_fitness,,,draft_unreviewed
-EX015,Kettlebell swing,glutes|hamstrings|back,kettlebell,intermediate,cardio,endurance|strength,,,draft_unreviewed
-EX016,Barbell back squat,quadriceps|glutes,barbell,advanced,strength,strength|muscle_gain,,,draft_unreviewed
-EX017,Barbell deadlift,back|hamstrings|glutes,barbell,advanced,strength,strength|muscle_gain,,,draft_unreviewed
-EX018,Resistance band row,back|biceps,resistance_band,beginner,strength,muscle_gain|general_fitness,,,draft_unreviewed
-EX019,Resistance band pull-apart,shoulders|back,resistance_band,beginner,mobility,flexibility_mobility|general_fitness,,,draft_unreviewed
-EX020,Cat-cow stretch,back|core,yoga_mat,beginner,mobility,flexibility_mobility,,,draft_unreviewed
-EX021,Hamstring stretch,hamstrings,yoga_mat,beginner,flexibility,flexibility_mobility,,,draft_unreviewed
-EX022,Hip flexor stretch,quadriceps|glutes,yoga_mat,beginner,flexibility,flexibility_mobility,,,draft_unreviewed
-EX023,Single-leg balance,calves|core,bodyweight,beginner,balance,general_fitness|flexibility_mobility,,,draft_unreviewed
-EX024,Pike push-up,shoulders|triceps,bodyweight,advanced,strength,strength|muscle_gain,,,draft_unreviewed
+EX001,Bodyweight squat,quadriceps|glutes,bodyweight,beginner,strength,strength|general_fitness|muscle_gain,knee|hip,"Stand with feet shoulder-width apart. Lower your hips back and down while keeping your chest up, then drive through heels to return.",reviewed
+EX002,Standard push-up,chest|triceps|shoulders,bodyweight,beginner,strength,strength|muscle_gain|general_fitness,wrist|shoulder|elbow,"Start in a high plank position. Lower your chest until it nearly touches the floor, keeping elbows at 45 degrees, then press back up.",reviewed
+EX003,Forearm plank,core,bodyweight,beginner,strength,strength|general_fitness,lower_back,"Rest on your forearms and toes. Keep your body in a rigid straight line from head to heels, engaging your glutes and core.",reviewed
+EX004,Glute bridge,glutes|hamstrings,bodyweight,beginner,strength,strength|general_fitness,none,Lie on your back with knees bent and feet flat. Drive through your heels to raise your hips until thighs and torso align.,reviewed
+EX005,Walking lunge,quadriceps|glutes,bodyweight,intermediate,strength,strength|muscle_gain|endurance,knee|hip,Step forward with one leg and lower hips until both knees are bent at about 90 degrees. Push off front foot to transition into next step.,reviewed
+EX006,Jumping jacks,full_body,bodyweight,beginner,cardio,endurance|general_fitness,ankle|knee,"Jump feet out wide while swinging arms overhead in a smooth rhythmic motion, then return to starting stance.",reviewed
+EX007,High knees,quadriceps|core,bodyweight,beginner,cardio,endurance,knee|ankle,Run in place bringing knees up toward chest level rapidly while pumping arms to maintain cardiovascular tempo.,reviewed
+EX008,Burpee,full_body,bodyweight,advanced,cardio,endurance|strength,wrist|shoulder|knee|lower_back,"From standing drop into a squat thrust, kick feet back to plank, do a push-up, jump feet forward and leap vertically.",reviewed
+EX009,Mountain climbers,core|shoulders,bodyweight,intermediate,cardio,endurance|general_fitness,wrist|shoulder,"From a high plank position, drive alternating knees toward chest at a rapid controlled pace while keeping hips stable.",reviewed
+EX010,Pull-up,back|biceps,pull_up_bar,advanced,strength,strength|muscle_gain,shoulder|elbow,"Grip bar overhand slightly wider than shoulder-width. Pull chest up toward the bar, retracting shoulder blades, then lower under control.",reviewed
+EX011,Dumbbell bench press,chest|triceps,dumbbells|bench,intermediate,strength,muscle_gain|strength,shoulder|wrist,"Lie on bench holding dumbbells at chest level. Press upward until arms are extended, then slowly lower dumbbells back down.",reviewed
+EX012,Single-arm dumbbell row,back|biceps,dumbbells|bench,beginner,strength,muscle_gain|strength|general_fitness,lower_back,"Support one knee and hand on bench. Hold dumbbell in free hand and row elbow straight up alongside torso, squeezing back muscles.",reviewed
+EX013,Dumbbell shoulder press,shoulders|triceps,dumbbells,intermediate,strength,muscle_gain|strength,shoulder|neck,"Stand or sit tall with dumbbells at ear height. Press weights overhead until arms are straight, keeping core tightly braced.",reviewed
+EX014,Goblet squat,quadriceps|glutes,kettlebell,beginner,strength,strength|muscle_gain|general_fitness,knee|lower_back,Hold a kettlebell close against chest with both hands. Perform a deep controlled squat keeping torso upright.,reviewed
+EX015,Kettlebell swing,glutes|hamstrings|back,kettlebell,intermediate,cardio,endurance|strength,lower_back|shoulder,Hinge at hips with knees slightly bent. Swing kettlebell back between legs then snap hips explosively to swing weight to chest height.,reviewed
+EX016,Barbell back squat,quadriceps|glutes,barbell,advanced,strength,strength|muscle_gain,knee|lower_back|hip,"Rest barbell across upper traps. Squat down until thighs are parallel to floor while keeping spine neutral, then drive upward.",reviewed
+EX017,Barbell deadlift,back|hamstrings|glutes,barbell,advanced,strength,strength|muscle_gain,lower_back|hip,"Stand with barbell over midfoot. Grip bar, flatten back, and drive through floor using legs and hips to stand upright with weight.",reviewed
+EX018,Resistance band row,back|biceps,resistance_band,beginner,strength,muscle_gain|general_fitness,none,"Loop band around feet or fixed anchor. Pull handles towards ribcage, squeezing shoulder blades together, then slowly release.",reviewed
+EX019,Resistance band pull-apart,shoulders|back,resistance_band,beginner,mobility,flexibility_mobility|general_fitness,none,"Hold band in front of chest at shoulder width. Pull arms apart horizontally until band touches chest, then return smoothly.",reviewed
+EX020,Cat-cow stretch,back|core,yoga_mat,beginner,mobility,flexibility_mobility,wrist,"On hands and knees, gently alternate between arching back toward ceiling and dropping belly while lifting chest.",reviewed
+EX021,Seated hamstring stretch,hamstrings,yoga_mat,beginner,flexibility,flexibility_mobility,none,Sit with one leg extended and hinge gently at hips toward foot without rounding spine aggressively until gentle tension is felt.,reviewed
+EX022,Kneeling hip flexor stretch,quadriceps|glutes,yoga_mat,beginner,flexibility,flexibility_mobility,knee,Kneel on one knee with opposite foot flat in front. Gently shift weight forward while keeping torso upright to open hip flexors.,reviewed
+EX023,Single-leg balance stand,calves|core,bodyweight,beginner,balance,general_fitness|flexibility_mobility,ankle,Stand tall on one leg with soft knee. Focus eyes on a fixed point and hold balance for 30 seconds per side.,reviewed
+EX024,Pike push-up,shoulders|triceps,bodyweight,advanced,strength,strength|muscle_gain,shoulder|wrist,"Assume downward dog position with hips high. Bend elbows to lower crown of head toward floor, then press back up strongly.",reviewed

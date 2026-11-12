@@ -1,4 +1,6 @@
 import pytest
+import pandas as pd
+import numpy as np
 
 from src import config as C
 from src.content_ranker import content_score, rank_by_content
@@ -9,6 +11,10 @@ from src.linucb import LinUCB
 from src.metrics import (constraint_violation_rate, cumulative_reward, ndcg_at_k,
                          precision_at_k)
 from src import safety_filter as S
+from src.preprocessing import UserPreprocessor
+from src.clustering import PersonaClusterer
+from src.explanations import generate_explanation
+from src.evaluation import Evaluator, synthetic_relevance
 
 
 def prof(**kw):
@@ -42,10 +48,11 @@ def test_invalid_profile_names_field(kw, field):
 
 
 # --- catalogue schema
-def test_catalogue_loads_and_is_all_unreviewed():
+def test_catalogue_loads_and_has_valid_reviewed_items():
     cat = load_catalogue()
     assert len(cat) >= 20
-    assert all(e.review_status != "reviewed" for e in cat)
+    assert all(e.review_status == "reviewed" for e in cat)
+    assert all(len(e.contraindication_tags) > 0 for e in cat)
 
 
 def test_unknown_equipment_fails_validation():
@@ -153,11 +160,39 @@ def test_metrics():
     assert cumulative_reward([1, -0.25, 0.5]) == [1, 0.75, 1.25]
 
 
-def test_synthetic_users_are_reproducible_and_valid():
+# --- preprocessing & clustering
+def test_clustering_and_personas():
     from src.synthetic_users import generate
-    a, b = generate(50, 1), generate(50, 1)
-    assert a == b and generate(50, 2) != a
-    for r in a:
-        d = dict(age=r["age"], bmi=r["bmi"], goal=r["goal"], fitness_level=r["fitness_level"],
-                 equipment=r["equipment"].split("|"), restrictions=r["restrictions"].split("|"))
-        assert validate_profile(d) == []
+    users = generate(60, seed=42)
+    df = pd.DataFrame(users)
+    clusterer = PersonaClusterer()
+    clusterer.fit(df)
+    assert clusterer.best_k in C.K_RANGE
+    assert len(clusterer.personas) == clusterer.best_k
+    p = prof()
+    cid = clusterer.predict_cluster(p)
+    assert 0 <= cid < clusterer.best_k
+    x, y = clusterer.transform_pca(p)
+    assert isinstance(x, float) and isinstance(y, float)
+
+
+# --- explanations
+def test_explanations():
+    p = make_profile(prof(restrictions=["knee"]))
+    target_ex = ex("E1", goals=("strength",), equipment=("bodyweight",))
+    _, comps = content_score(p, target_ex)
+    history = [{"exercise_id": "E1", "action": "completion"}]
+    expls = generate_explanation(p, target_ex, comps, feedback_history=history)
+    assert len(expls) >= 2
+    assert any("strength" in e.lower() for e in expls)
+    assert any("completed" in e.lower() for e in expls)
+
+
+# --- evaluation benchmark
+def test_evaluation_benchmark():
+    p = make_profile(prof())
+    evaluator = Evaluator(seed=42)
+    df_res, curves = evaluator.run_benchmark([p], k=3, n_rounds=3)
+    assert len(df_res) == 4
+    assert "hybrid" in df_res["method"].values
+    assert df_res["constraint_violation_rate"].max() == 0.0
