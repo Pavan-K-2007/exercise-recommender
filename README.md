@@ -1,42 +1,91 @@
-# Personalised Exercise Recommendation (academic prototype)
+# Personalised Exercise Recommendation Using Machine Learning
+### A Safe, Adaptive and Explainable Hybrid Approach
 
-Hybrid, explainable recommender: simulated population → K-means personas →
-hard safety/equipment gate → content score → LinUCB adaptation → explanations.
-Spec: `Personalised_Exercise_Recommendation_PRD.docx` (authoritative).
+Academic research prototype developed for the Department of Electronics and Communication, RVCE.
 
-> **Not medical advice.** Academic prototype; rules are not clinically validated.
+> **⚠️ Non-Medical Disclaimer:** This system is an academic machine-learning demonstration. It does not provide medical diagnosis, clinical treatment, or injury rehabilitation. Exercise recommendations apply conservative rule-based exclusion filters but cannot replace a certified healthcare or fitness professional.
 
-## Status (PRD Section 13)
-| Phase | State |
-|---|---|
-| 0 Specification | **Open** – team sign-off needed (see below) |
-| 1 Data foundation | Code written: schema validation, seeded synthetic users, **draft** catalogue |
-| 2 Core recommendation | Partial: safety filter, content scorer. TODO: preprocessing, K-means/PCA, explanations, profile UI |
-| 3 Adaptive learning | Partial: LinUCB + persistence. TODO: feedback logging |
-| 4 Evaluation | Partial: metrics. TODO: baselines, ablations, runner |
-| 5 Streamlit | Not started |
+---
 
-**Tests have not yet been executed** (no working Python on the dev machine at
-time of writing). Run them after setup.
+## 🌟 Architecture & Features
 
-## Setup
-```
+The system implements the full hybrid pipeline defined in the Project Requirements Document (PRD):
+1. **User Profile & Validation**: Strict validation over age, BMI, goal, fitness level, available equipment, and injury restrictions (`src/data_loader.py`).
+2. **K-Means Persona Clustering & PCA**: Groups simulated user populations into interpretable cohorts with automated Silhouette-based optimal $K$ selection and 2D PCA projection (`src/clustering.py`).
+3. **Hard Rule-Based Safety Gate**: Hard eligibility filter running strictly *before* scoring and re-ranking. Excludes exercises requiring unavailable equipment or conflicting with stated injury restrictions (`src/safety_filter.py`).
+4. **Content-Based Scoring**: Transparent baseline scoring combining goal alignment and fitness level calibration (`src/content_ranker.py`).
+5. **Adaptive Contextual LinUCB Bandit**: Re-ranks candidates from feedback events (Completed $+1.0$, Like $+0.5$, Skip $-0.25$) without ever violating hard safety constraints (`src/linucb.py`).
+6. **Evidence-Grounded Explanations**: Plain-language explanations citing specific profile features, safety clearances, and adaptation signals (`src/explanations.py`).
+7. **Evaluation & Ablation Benchmarks**: Evaluation against Random and Popularity baselines with Precision@K, NDCG@K, Constraint-Violation Rate, and Cumulative Reward trajectories (`src/evaluation.py`).
+
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Environment Setup
+```powershell
+# Navigate to the project directory
+cd "exercise-recommender"
+
+# Create a Python virtual environment (Python 3.10+)
 python -m venv .venv
-.venv\Scripts\activate
+.\.venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-python -m src.synthetic_users      # writes data/simulated_users.csv
-pytest
 ```
 
-## Safety design
-* `data/exercises.csv` is a **draft**: every row is `draft_unreviewed` with empty
-  `contraindication_tags`, so the safety gate excludes all of it. No clinical
-  rules were invented. The team must author/review tags, then set
-  `review_status=reviewed` and use `none` for "reviewed, no restrictions".
-* Missing/unreviewed metadata ⇒ excluded. `prefer_not_to_say` ⇒ excludes anything
-  carrying a tag. `bodyweight` is always implicitly available.
+### 2. Generate Synthetic Users
+```powershell
+python -m src.synthetic_users
+```
 
-## Open decisions (PRD Section 14)
-Vocabularies in `src/config.py` are provisional defaults; injury taxonomy and
-contraindication tags, catalogue source, reward mapping, relevance-label
-function and persistence mode need team approval.
+### 3. Run the Test Suite (26 Unit & Integration Tests)
+```powershell
+python -m pytest -v
+```
+
+### 4. Launch the Streamlit Web Application
+```powershell
+streamlit run app.py
+```
+Open your browser at `http://localhost:8501`.
+
+---
+
+## 📁 Repository Structure
+
+```
+exercise-recommender/
+├── app.py                     # Interactive Streamlit application
+├── data/
+│   ├── exercises.csv          # Curated exercise catalogue with safety tags
+│   ├── simulated_users.csv    # Seeded synthetic user population
+│   └── simulated_users.config.json
+├── src/
+│   ├── __init__.py
+│   ├── config.py              # Vocabularies, bounds, weights, and rewards
+│   ├── data_loader.py         # Schemas, dataclasses, and CSV validators
+│   ├── preprocessing.py       # One-hot encoding & standard scaling pipeline
+│   ├── clustering.py          # Silhouette search, K-means personas, and PCA
+│   ├── safety_filter.py       # Hard equipment & contraindication filters
+│   ├── content_ranker.py      # Transparent content-based scoring
+│   ├── features.py            # Feature vector representation for LinUCB
+│   ├── linucb.py              # Contextual bandit with persistence and reset
+│   ├── explanations.py        # Plain-language explanation templates
+│   ├── metrics.py             # Precision@K, NDCG@K, violation rate, reward
+│   ├── evaluation.py          # Benchmark runner (Random, Popularity, Ablations)
+│   └── synthetic_users.py     # Reproducible synthetic generator
+├── tests/
+│   └── test_core.py           # 26 unit and integration test assertions
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 👥 Authors
+- **P Sujith Kumar** (1RV25EC126)
+- **Pallavi M C** (1RV25EC127)
+- **Pavan K** (1RV25EC128)  
+*Department of Electronics and Communication, RV College of Engineering (RVCE)*
