@@ -1,0 +1,7 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+streamlit
+pytest
+# TODO: pin tested versions once the environment is created (PRD 7.3).

@@ -1,0 +1,25 @@
+exercise_id,name,muscle_groups,equipment,difficulty,exercise_type,goal_tags,contraindication_tags,instructions,review_status
+EX001,Bodyweight squat,quadriceps|glutes,bodyweight,beginner,strength,strength|general_fitness|muscle_gain,,,draft_unreviewed
+EX002,Push-up,chest|triceps|shoulders,bodyweight,beginner,strength,strength|muscle_gain|general_fitness,,,draft_unreviewed
+EX003,Plank,core,bodyweight,beginner,strength,strength|general_fitness,,,draft_unreviewed
+EX004,Glute bridge,glutes|hamstrings,bodyweight,beginner,strength,strength|general_fitness,,,draft_unreviewed
+EX005,Walking lunge,quadriceps|glutes,bodyweight,intermediate,strength,strength|muscle_gain|endurance,,,draft_unreviewed
+EX006,Jumping jacks,full_body,bodyweight,beginner,cardio,endurance|general_fitness,,,draft_unreviewed
+EX007,High knees,quadriceps|core,bodyweight,beginner,cardio,endurance,,,draft_unreviewed
+EX008,Burpee,full_body,bodyweight,advanced,cardio,endurance|strength,,,draft_unreviewed
+EX009,Mountain climbers,core|shoulders,bodyweight,intermediate,cardio,endurance|general_fitness,,,draft_unreviewed
+EX010,Pull-up,back|biceps,pull_up_bar,advanced,strength,strength|muscle_gain,,,draft_unreviewed
+EX011,Dumbbell bench press,chest|triceps,dumbbells|bench,intermediate,strength,muscle_gain|strength,,,draft_unreviewed
+EX012,Dumbbell row,back|biceps,dumbbells,beginner,strength,muscle_gain|strength|general_fitness,,,draft_unreviewed
+EX013,Dumbbell shoulder press,shoulders|triceps,dumbbells,intermediate,strength,muscle_gain|strength,,,draft_unreviewed
+EX014,Goblet squat,quadriceps|glutes,kettlebell,beginner,strength,strength|muscle_gain|general_fitness,,,draft_unreviewed
+EX015,Kettlebell swing,glutes|hamstrings|back,kettlebell,intermediate,cardio,endurance|strength,,,draft_unreviewed
+EX016,Barbell back squat,quadriceps|glutes,barbell,advanced,strength,strength|muscle_gain,,,draft_unreviewed
+EX017,Barbell deadlift,back|hamstrings|glutes,barbell,advanced,strength,strength|muscle_gain,,,draft_unreviewed
+EX018,Resistance band row,back|biceps,resistance_band,beginner,strength,muscle_gain|general_fitness,,,draft_unreviewed
+EX019,Resistance band pull-apart,shoulders|back,resistance_band,beginner,mobility,flexibility_mobility|general_fitness,,,draft_unreviewed
+EX020,Cat-cow stretch,back|core,yoga_mat,beginner,mobility,flexibility_mobility,,,draft_unreviewed
+EX021,Hamstring stretch,hamstrings,yoga_mat,beginner,flexibility,flexibility_mobility,,,draft_unreviewed
+EX022,Hip flexor stretch,quadriceps|glutes,yoga_mat,beginner,flexibility,flexibility_mobility,,,draft_unreviewed
+EX023,Single-leg balance,calves|core,bodyweight,beginner,balance,general_fitness|flexibility_mobility,,,draft_unreviewed
+EX024,Pike push-up,shoulders|triceps,bodyweight,advanced,strength,strength|muscle_gain,,,draft_unreviewed
