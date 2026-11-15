@@ -193,6 +193,55 @@ def test_evaluation_benchmark():
     p = make_profile(prof())
     evaluator = Evaluator(seed=42)
     df_res, curves = evaluator.run_benchmark([p], k=3, n_rounds=3)
-    assert len(df_res) == 4
-    assert "hybrid" in df_res["method"].values
+    assert len(df_res) == 5
+    assert set(df_res["method"]) == {"random", "popularity", "no_adaptation", "no_clustering", "hybrid"}
     assert df_res["constraint_violation_rate"].max() == 0.0
+
+
+def test_persona_scoring_and_cluster_features():
+    from src.clustering import Persona
+    p = make_profile(prof())
+    persona = Persona(0, "Beginner Strength Cohort", "strength", "beginner", 28.0, 23.0, ["bodyweight"], "")
+    target_ex = ex("E1", goals=("strength",), difficulty="beginner")
+    score_with, comps_with = content_score(p, target_ex, persona=persona)
+    score_without, comps_without = content_score(p, target_ex, persona=None)
+    assert comps_with["persona_match"] == 1.0
+    assert comps_without["persona_match"] == 0.0
+    assert score_with == pytest.approx(1.0)
+    assert score_without == pytest.approx(1.0)
+
+    v_cluster = feature_vector(p, target_ex, cluster_id=2)
+    v_none = feature_vector(p, target_ex, cluster_id=None)
+    assert len(v_cluster) == FEATURE_DIM and len(v_none) == FEATURE_DIM
+    assert v_cluster[-C.MAX_CLUSTERS + 2] == 1.0
+    assert sum(v_none[-C.MAX_CLUSTERS:]) == 0.0
+
+
+def test_multi_seed_benchmark(tmp_path):
+    evaluator = Evaluator(seed=42)
+    df_sum, curves = evaluator.run_multi_seed_benchmark(
+        seeds=(42, 43), n_dev=40, n_test=5, k=3, n_rounds=2, log_run=False
+    )
+    assert len(df_sum) == 5
+    assert "precision@k_mean" in df_sum.columns and "precision@k_std" in df_sum.columns
+    assert len(curves["hybrid"]["mean"]) == 2
+    assert len(curves["hybrid"]["std"]) == 2
+
+
+def test_persistence_roundtrip(tmp_path):
+    from src.persistence import clear_local_state, load_feedback_log, load_or_init_bandit, log_feedback_event
+    b_path = tmp_path / "bandit.json"
+    f_path = tmp_path / "feedback.jsonl"
+    b = load_or_init_bandit(FEATURE_DIM, path=b_path)
+    assert b.n_updates == 0
+    b.update(feature_vector(make_profile(prof()), ex()), 1.0)
+    b.save(b_path)
+    b2 = load_or_init_bandit(FEATURE_DIM, path=b_path)
+    assert b2.n_updates == 1
+
+    log_feedback_event("EX001", "Squat", "completion", 1.0, cluster_id=0, path=f_path)
+    events = load_feedback_log(f_path)
+    assert len(events) == 1 and events[0]["action"] == "completion"
+
+    clear_local_state(bandit_path=b_path, feedback_path=f_path)
+    assert not b_path.exists() and not f_path.exists()

@@ -6,6 +6,8 @@ claims (e.g. 'prevents injury') are ever produced.
 """
 from __future__ import annotations
 
+from typing import Any
+
 from . import config as C
 from .data_loader import Exercise, UserProfile
 
@@ -16,6 +18,7 @@ def generate_explanation(
     content_components: dict,
     bandit_score: float | None = None,
     feedback_history: list[dict] | None = None,
+    persona: Any = None,
 ) -> list[str]:
     reasons = []
 
@@ -46,6 +49,10 @@ def generate_explanation(
     if profile.restrictions:
         safe_from = ", ".join(r.replace("_", " ") for r in profile.restrictions)
         reasons.append(f"Cleared safety check: no stress flagged for restricted areas ({safe_from}).")
+
+    # 5. Persona Cohort Alignment
+    if persona is not None and content_components.get("persona_match", 0.0) >= 0.5:
+        reasons.append(f"Aligns with your **{persona.name}** cohort profile.")
 
     # 5. Bandit Adaptation History (if interacted)
     if feedback_history:

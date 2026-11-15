@@ -1,7 +1,6 @@
-numpy
-pandas
-scikit-learn
-matplotlib
-streamlit
-pytest
-# TODO: pin tested versions once the environment is created (PRD 7.3).
+numpy==2.5.4
+pandas==3.1.1
+scikit-learn==1.9.1
+matplotlib==3.11.2
+streamlit==1.67.0
+pytest==9.2.0

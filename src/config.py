@@ -7,8 +7,12 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 CATALOGUE_PATH = DATA_DIR / "exercises.csv"
 USERS_PATH = DATA_DIR / "simulated_users.csv"
+BANDIT_STATE_PATH = DATA_DIR / "bandit_state.json"
+FEEDBACK_LOG_PATH = DATA_DIR / "feedback_log.jsonl"
+EXPERIMENT_LOG_PATH = DATA_DIR / "experiment_runs.jsonl"
 
 SEED = 42
+EVAL_SEEDS = (42, 101, 202, 303, 404)
 
 # --- Controlled vocabularies (PRD 5.1, 5.2, 14) ---
 GOALS = ("strength", "muscle_gain", "endurance", "flexibility_mobility", "general_fitness")
@@ -31,7 +35,7 @@ AGE_BOUNDS = (14, 90)
 BMI_BOUNDS = (12.0, 60.0)
 
 # --- Content score weights (must sum to 1; PRD 5.5) ---
-SCORE_WEIGHTS = {"goal_match": 0.6, "difficulty_match": 0.4}
+SCORE_WEIGHTS = {"goal_match": 0.55, "difficulty_match": 0.35, "persona_match": 0.10}
 
 # --- Reward mapping: a design hypothesis, NOT from the abstract (PRD 5.6) ---
 REWARDS = {"completion": 1.0, "like": 0.5, "skip": -0.25}
@@ -42,3 +46,4 @@ LINUCB_RIDGE = 1.0
 
 # --- Clustering ---
 K_RANGE = range(2, 9)
+MAX_CLUSTERS = max(K_RANGE)
